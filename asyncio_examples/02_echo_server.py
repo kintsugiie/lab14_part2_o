@@ -63,23 +63,16 @@ async def handle_echo(reader, writer):
 
     # TODO 6: Реализуйте эхо-сервер. Выполните следующие шаги по порядку:
     #
-    # 1. Прочитайте данные от клиента:
-    #        data = await reader.read(1024)
-    #
-    # 2. Декодируйте байты в строку:
-    #        message = data.decode()
-    #
-    # 3. Получите адрес клиента и выведите лог:
-    #        addr = writer.get_extra_info('peername')
-    #        print(f"Подключение от {addr}, сообщение: '{message}'")
-    #
-    # 4. Отправьте данные обратно клиенту (эхо):
-    #        writer.write(data)
-    #        await writer.drain()
+    data = await reader.read(1024)
+    message = data.decode()
+    addr = writer.get_extra_info('peername')
+    print(f"Подключение от {addr}, сообщение: '{message}'")
+    writer.write(data)
+    await writer.drain()
     #
     # 5. Закройте соединение:
-    #        writer.close()
-    #        await writer.wait_closed()
+    writer.close()
+    await writer.wait_closed()
 
     # --- Ваш код здесь ---
     pass

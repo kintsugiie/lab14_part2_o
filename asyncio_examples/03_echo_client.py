@@ -60,19 +60,18 @@ async def tcp_echo_client(message, host, port):
     # TODO 7: Отправьте сообщение серверу и получите ответ.
     #
     # 1. Закодируйте и отправьте:
-    #        writer.write(message.encode())
-    #        await writer.drain()
+    writer.write(message.encode())
+    await writer.drain()
     #
     # 2. Прочитайте ответ:
-    #        data = await reader.read(1024)
+    data = await reader.read(1024)
     #
     # 3. Выведите результат:
-    #        print(f"Отправлено: '{message}' -> Получено: '{data.decode()}'")
+    print(f"Отправлено: '{message}' -> Получено: '{data.decode()}'")
     #
     # 4. Закройте соединение:
-    #        writer.close()
-    #        await writer.wait_closed()
-
+    writer.close()
+    await writer.wait_closed()
     # --- Ваш код здесь ---
     pass
     # --- Конец вашего кода ---
@@ -91,10 +90,8 @@ async def main_multiple():
     # вывода — будет ли он совпадать с порядком создания?
     #
     # Подсказка:
-    #   messages = [f"Сообщение {i}" for i in range(1, 6)]
-    #   await asyncio.gather(
-    #       *(tcp_echo_client(msg, HOST, PORT) for msg in messages)
-    #   )
+    messages = [f"Сообщение {i}" for i in range(1, 6)]
+    await asyncio.gather(*(tcp_echo_client(msg, HOST, PORT) for msg in messages))
 
     # --- Ваш код здесь ---
     pass

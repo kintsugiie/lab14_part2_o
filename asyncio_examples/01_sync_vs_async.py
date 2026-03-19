@@ -1,16 +1,3 @@
-"""
-Сравнение синхронного и асинхронного выполнения.
-
-Демонстрирует разницу во времени между последовательным вызовом
-блокирующих операций и асинхронным запуском через asyncio.gather().
-
-Задание:
-  TODO 5 — дописать асинхронную версию main_async() с asyncio.gather()
-
-Запуск:
-    python3 01_sync_vs_async.py
-"""
-
 import time
 import asyncio
 
@@ -50,22 +37,14 @@ async def fetch_data_async(source, delay):
 
 async def main_async():
     """Асинхронный запуск трёх «запросов» одновременно."""
-
-    # TODO 5: Используйте asyncio.gather() для одновременного запуска
-    # трёх вызовов fetch_data_async с теми же параметрами, что и в main_sync.
-    # Верните список результатов.
-    #
-    # Подсказка:
-    #   results = await asyncio.gather(
-    #       fetch_data_async("API сервер", 2),
-    #       fetch_data_async("База данных", 3),
-    #       fetch_data_async("Файловое хранилище", 1),
-    #   )
-    #   return results
-
-    # --- Ваш код здесь ---
-    pass
-    # --- Конец вашего кода ---
+    
+    # TODO 5: asyncio.gather() для параллельного выполнения
+    results = await asyncio.gather(
+        fetch_data_async("API сервер", 2),
+        fetch_data_async("База данных", 3),
+        fetch_data_async("Файловое хранилище", 1),
+    )
+    return results
 
 
 if __name__ == '__main__':
@@ -99,3 +78,4 @@ if __name__ == '__main__':
         print(f"Синхронно:  {time_sync:.2f} сек")
         print(f"Асинхронно: {time_async:.2f} сек")
         print(f"Ускорение:  {time_sync / time_async:.1f}x")
+

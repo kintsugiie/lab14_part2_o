@@ -76,20 +76,20 @@ def handle_client(conn, addr):
     # TODO 9: Реализуйте обработку клиента:
     #
     # 1. Выведите PID текущего процесса:
-    #        print(f"[PID {os.getpid()}] Клиент {addr} подключён")
+    print(f"[PID {os.getpid()}] Клиент {addr} подключён")
     #
     # 2. Прочитайте данные от клиента:
-    #        data = conn.recv(1024)
+    data = conn.recv(1024)
     #
     # 3. Выведите полученное сообщение:
-    #        print(f"[PID {os.getpid()}] Получено: '{data.decode()}'")
+    print(f"[PID {os.getpid()}] Получено: '{data.decode()}'")
     #
     # 4. Отправьте данные обратно (эхо):
-    #        conn.sendall(data)
+    conn.sendall(data)
     #
     # 5. Закройте соединение:
-    #        conn.close()
-    #        print(f"[PID {os.getpid()}] Клиент {addr} отключён")
+    conn.close()
+    print(f"[PID {os.getpid()}] Клиент {addr} отключён")
 
     # --- Ваш код здесь ---
     pass
